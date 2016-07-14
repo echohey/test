@@ -167,7 +167,7 @@ public class EasyHttp {
 
 
     /**
-     * Send HTTP request to for expected response : text/json
+     * Send HTTP request to for expected response : application/json
      */
 
 
@@ -226,7 +226,7 @@ public class EasyHttp {
 
 
     /**
-     * Send HTTP request to for expected response : Json Array, text/json
+     * Send HTTP request to for expected response : Json Array, application/json
      */
 
 
