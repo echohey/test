@@ -109,7 +109,7 @@ public class EasyHttp {
      * Send HTTP request to for expected response : text/html
      */
 
-    public void TextRequest() {
+    public void SendRequest() {
 
 
         stringRequest = new StringRequest(this.method, this.url,
@@ -166,122 +166,7 @@ public class EasyHttp {
     }
 
 
-    /**
-     * Send HTTP request to for expected response : application/json
-     */
 
-
-    public void JsonRequest() {
-
-
-        jsonObjReq = new JsonObjectRequest(this.method,
-                url, null,
-                new Response.Listener<JSONObject>() {
-
-                    @Override
-                    public void onResponse(JSONObject response) {
-
-                        EasyHttp.this.handleResponse(response, EasyHttp.this.getResponseCode(), EasyHttp.this.getResponseHeaders());
-                    }
-                }, new Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-                EasyHttp.this.handleErrorResponse(error);
-
-            }
-        }) {
-
-            @Override
-            protected Map<String, String> getParams() {
-
-                return EasyHttp.this.parameters;
-            }
-
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-
-                if (EasyHttp.this.Headers != null) {
-
-                    return EasyHttp.this.Headers;
-                }
-                return super.getHeaders();
-            }
-
-            @Override
-            protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
-                EasyHttp.this.responsecode = response.statusCode;
-                EasyHttp.this.responseheaders = response.headers;
-                return super.parseNetworkResponse(response);
-
-            }
-
-
-        };
-        Volley.newRequestQueue(con).add(jsonObjReq);
-
-
-    }
-
-
-    /**
-     * Send HTTP request to for expected response : Json Array, application/json
-     */
-
-
-    public void JsonArrayRequest() {
-
-
-        jsonArryReq = new JsonArrayRequest(this.method,
-                url, null,
-                new Response.Listener<JSONArray>() {
-
-                    @Override
-                    public void onResponse(JSONArray response) {
-
-                        EasyHttp.this.handleResponse(response, EasyHttp.this.getResponseCode(), EasyHttp.this.getResponseHeaders());
-                    }
-                }, new Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-                EasyHttp.this.handleErrorResponse(error);
-
-            }
-        }) {
-
-            @Override
-            protected Map<String, String> getParams() {
-
-                return EasyHttp.this.parameters;
-            }
-
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-
-                if (EasyHttp.this.Headers != null) {
-
-                    return EasyHttp.this.Headers;
-                }
-                return super.getHeaders();
-            }
-
-
-            @Override
-            protected Response<JSONArray> parseNetworkResponse(NetworkResponse response) {
-                EasyHttp.this.responsecode = response.statusCode;
-                EasyHttp.this.responseheaders = response.headers;
-                return super.parseNetworkResponse(response);
-
-            }
-
-        };
-        Volley.newRequestQueue(con).add(jsonArryReq);
-
-
-    }
 
     /**
      * The response will be handled here
@@ -296,30 +181,6 @@ public class EasyHttp {
 
     }
 
-    /**
-     * The response will be handled here
-     *
-     * @param responseContent The Json response
-     * @param responseCode    The HTTP response code
-     * @param responseHeaders The HTTP response headers
-     */
-    protected void handleResponse(JSONObject responseContent, int responseCode, Map responseHeaders) {
-
-
-    }
-
-    /**
-     * The response will be handled here
-     *
-     * @param responseContent The Json Array response
-     * @param responseCode    The HTTP response code
-     * @param responseHeaders The HTTP response headers
-     */
-
-    protected void handleResponse(JSONArray responseContent, int responseCode, Map responseHeaders) {
-
-
-    }
 
     /**
      * When error happens this will be executed
