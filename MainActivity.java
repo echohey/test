@@ -126,6 +126,63 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+	
+	// Response body as byte array
+	public void SendHttpPOSTRequest() {
+
+        // Send Normal http request
+        this.a = new EasyHttp("http://192.168.1.18/android/post.php", MainActivity.this, EasyHttp.POST) {
+
+            /**
+             * The response will be handled here
+             *
+             * @param responseContent The response body as byte array
+             * @param responseCode    The HTTP response code
+             * @param responseHeaders The HTTP response headers
+             */
+
+            protected void handleResponse(byte[] responseContent, int responseCode, Map responseHeaders) {
+
+                // Do something
+
+            }
+
+            /**
+             * When error happens this will be executed
+             *
+             * @param error The error information
+             */
+
+
+            protected void handleErrorResponse(VolleyError error) {
+
+                // Do something
+
+            }
+
+        };
+
+        // Set Post parameters
+
+        HashMap<String, String> params = new HashMap<>();
+        params.put("username","sam");
+        params.put("pass","123456");
+        this.a.setParams(params);
+
+
+
+        // Set custom request headers ~ "Optional"
+
+        HashMap<String, String> headers = new HashMap<>();
+        headers.put("token", "123123123");
+        this.a.setRequestHeaders(headers);
+
+        // Send The request to Server;
+
+        this.a.SendRequest();
+
+
+    }
 
 
     

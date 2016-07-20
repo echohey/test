@@ -14,13 +14,8 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.Map;
 
@@ -39,13 +34,12 @@ public class EasyHttp {
     private Context con = null;
     private String url = null;
     private StringRequest stringRequest = null;
-    private JsonObjectRequest jsonObjReq = null;
-    private JsonArrayRequest jsonArryReq = null;
     private boolean flag = false;
     private int method;
     private Map parameters = null;
     private Map Headers = null;
     private int responsecode;
+    private byte[] responsecontent;
     private Map<String, String> responseheaders = null;
 
 
@@ -96,6 +90,21 @@ public class EasyHttp {
         return this.responsecode;
     }
 
+    /**
+     * Get HTTP response content.
+     */
+
+    private byte[] getResponseContent() {
+        return this.responsecontent;
+    }
+
+    /**
+     * Get Context.
+     */
+
+    protected Context getContext() {
+        return this.con;
+    }
 
     /**
      * Get HTTP response headers.
@@ -120,6 +129,7 @@ public class EasyHttp {
                         // Result handling
 
                         EasyHttp.this.handleResponse(response, EasyHttp.this.getResponseCode(), EasyHttp.this.getResponseHeaders());
+                        EasyHttp.this.handleResponse(EasyHttp.this.getResponseContent(), EasyHttp.this.getResponseCode(), EasyHttp.this.getResponseHeaders());
 
 
                     }
@@ -154,6 +164,7 @@ public class EasyHttp {
             protected Response<String> parseNetworkResponse(NetworkResponse response) {
                 EasyHttp.this.responsecode = response.statusCode;
                 EasyHttp.this.responseheaders = response.headers;
+                EasyHttp.this.responsecontent = response.data;
                 return super.parseNetworkResponse(response);
 
             }
@@ -166,8 +177,6 @@ public class EasyHttp {
     }
 
 
-
-
     /**
      * The response will be handled here
      *
@@ -177,6 +186,19 @@ public class EasyHttp {
      */
 
     protected void handleResponse(String responseContent, int responseCode, Map responseHeaders) {
+
+
+    }
+
+    /**
+     * The response will be handled here
+     *
+     * @param responseContent The response body as byte array
+     * @param responseCode    The HTTP response code
+     * @param responseHeaders The HTTP response headers
+     */
+
+    protected void handleResponse(byte[] responseContent, int responseCode, Map responseHeaders) {
 
 
     }
